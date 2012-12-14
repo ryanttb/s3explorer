@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AwsExplorer.Models.S3Object>
+
+@{
+  ViewBag.Title = "Bulk Delete";
+}
+
+<h2>Bulk Delete</h2>
+
+@using(Html.BeginForm("BulkDelete", "S3Object", FormMethod.Get))
+{
+  <label>
+    <span>Prefix</span>
+    <input type="text" name="prefix" value="@ViewBag.prefix" />
+  </label>
+  
+  <label>
+    <span>Max Keys</span>
+    <input type="number" name="maxKeys" value="@ViewBag.maxKeys" />
+  </label>
+  
+  <button type="submit">Filter</button>
+}
+
+<p>Are you sure you want to delete these keys?</p>
+
+<table>
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.Key)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.LastModified)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Size)
+    </th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.Key)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.LastModified)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Size)
+      </td>
+    </tr>
+  }
+
+</table>
+
+@using (Html.BeginForm())
+{
+  <input type="hidden" name="prefix" value="@ViewBag.prefix" />
+  <input type="hidden" name="maxKeys" value="@ViewBag.maxKeys" />
+
+  <p>
+    <input type="submit" value="Yes, delete them all" />
+    |
+  @Html.ActionLink("No, back to list", "Index", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+  </p>
+}

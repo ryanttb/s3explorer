@@ -1,0 +1,39 @@
+﻿@model AwsExplorer.Models.S3Object
+
+@{
+  ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "S3Object", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  @Html.ValidationSummary(true)
+
+  <input type="hidden" name="prefix" value="@ViewBag.prefix" />
+  <input type="hidden" name="maxKeys" value="@ViewBag.maxKeys" />
+
+  <fieldset>
+    <legend>S3Object</legend>
+
+    <div class="editor-label">
+      Key
+    </div>
+    <div class="editor-field">
+      <input type="text" name="Key" value="@ViewBag.prefix" />
+    </div>
+
+    <label>
+      <span>File</span>
+      <input type="file" name="Content" />
+    </label>
+
+    <p>
+      <input type="submit" value="Create" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+</div>

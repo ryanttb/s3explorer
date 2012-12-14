@@ -1,0 +1,43 @@
+﻿@model AwsExplorer.Models.S3Object
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>S3Object</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Key)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Key)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastModified)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastModified)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Size)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Size)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContentType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContentType)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Key, prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys }) |
+    @Html.ActionLink("Back to List", "Index", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+</p>

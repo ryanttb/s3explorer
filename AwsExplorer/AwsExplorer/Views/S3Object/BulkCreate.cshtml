@@ -1,0 +1,39 @@
+﻿@model AwsExplorer.Models.S3Object
+
+@{
+  ViewBag.Title = "Bulk Upload";
+}
+
+<h2>Bulk Upload</h2>
+
+@using (Html.BeginForm("BulkCreate", "S3Object", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  @Html.ValidationSummary(true)
+
+  <input type="hidden" name="prefix" value="@ViewBag.prefix" />
+  <input type="hidden" name="maxKeys" value="@ViewBag.maxKeys" />
+
+  <fieldset>
+    <legend>S3Object</legend>
+
+    <div class="editor-label">
+      Prefix (appended to each file name, you probably want to end it with /)
+    </div>
+    <div class="editor-field">
+      <input type="text" name="Key" value="@ViewBag.prefix" />
+    </div>
+
+    <label>
+      <span>ZIP File</span>
+      <input type="file" name="Content" />
+    </label>
+
+    <p>
+      <input type="submit" value="Upload" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+</div>

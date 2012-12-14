@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AwsExplorer.Models.S3Object>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using(Html.BeginForm("Index", "S3Object", FormMethod.Get))
+{
+  <label>
+    <span>Prefix</span>
+    <input type="text" name="prefix" value="@ViewBag.prefix" />
+  </label>
+  
+  <label>
+    <span>Max Keys</span>
+    <input type="number" name="maxKeys" value="@ViewBag.maxKeys" />
+  </label>
+  
+  <button type="submit">Filter</button>
+}
+
+<p>
+  @Html.ActionLink("Create New", "Create", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys }) | 
+  @Html.ActionLink("Bulk Upload", "BulkCreate", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys }) |
+  @Html.ActionLink("Bulk Delete", "BulkDelete", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+</p>
+<table>
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.Key)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.LastModified)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Size)
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.Key)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.LastModified)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Size)
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Key, prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Key, prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Key, prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+      </td>
+    </tr>
+  }
+
+</table>

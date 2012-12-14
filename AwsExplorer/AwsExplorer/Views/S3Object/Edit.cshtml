@@ -1,0 +1,61 @@
+﻿@model AwsExplorer.Models.S3Object
+
+@{
+  ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "S3Object", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  @Html.ValidationSummary(true)
+
+  <input type="hidden" name="prefix" value="@ViewBag.prefix" />
+  <input type="hidden" name="maxKeys" value="@ViewBag.maxKeys" />
+
+  <fieldset>
+    <legend>S3Object</legend>
+
+    <div class="display-label">
+      @Html.DisplayNameFor(model => model.Key)
+    </div>
+    <div class="display-field">
+      @Html.HiddenFor(model => model.Key)
+      @Html.DisplayFor(model => model.Key)
+    </div>
+
+    <div class="display-label">
+      @Html.DisplayNameFor(model => model.LastModified)
+    </div>
+    <div class="display-field">
+      @Html.DisplayFor(model => model.LastModified)
+    </div>
+
+    <div class="display-label">
+      @Html.DisplayNameFor(model => model.Size)
+    </div>
+    <div class="display-field">
+      @Html.DisplayFor(model => model.Size)
+    </div>
+
+    <div class="display-label">
+      @Html.DisplayNameFor(model => model.ContentType)
+    </div>
+    <div class="display-field">
+      @Html.DisplayFor(model => model.ContentType)
+    </div>
+
+    <label>
+      <span>New file</span>
+      <input type="file" name="Content" />
+    </label>
+
+    <p>
+      <input type="submit" value="Save" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index", new { prefix = ViewBag.prefix, maxKeys = ViewBag.maxKeys })
+</div>
